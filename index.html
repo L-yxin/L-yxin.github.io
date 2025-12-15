@@ -13,31 +13,49 @@
       font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
     }
 
-    /* 全屏水印样式（核心） */
+    /* 增强全屏水印样式 */
     .watermark {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      pointer-events: none; /* 不影响点击 */
+      pointer-events: none;
       z-index: 9999;
+      opacity: 0.15;
     }
-    .watermark::after {
-      content: "毕设作品,非真实信息";
+    .watermark::before {
+      content: "毕设作品·非真实信息";
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      font-size: 32px;
-      color: rgba(0, 0, 0, 0.5);
-      letter-spacing: 5px;
-      line-height: 150px;
+      font-size: 36px;
+      color: rgba(0, 0, 0, 0.7);
+      letter-spacing: 8px;
+      line-height: 180px;
       text-align: center;
       transform: rotate(-15deg);
       transform-origin: center center;
       background-repeat: repeat;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .watermark::after {
+      content: "作者：LYX";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 18px;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 500;
+      letter-spacing: 2px;
+      transform: rotate(0);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 15px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     /* 页面容器 */
@@ -56,249 +74,487 @@
 
     /* 微信支付主题 */
     .wx-pay {
-      background-color: #f0f9eb;
+      background: linear-gradient(135deg, #f0f9eb 0%, #e6f4d9 100%);
     }
     .wx-pay .success-card {
       background-color: #fff;
-      border-radius: 12px;
-      padding: 40px 20px;
+      border-radius: 20px;
+      padding: 50px 30px;
       width: 100%;
-      max-width: 400px;
+      max-width: 480px;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px rgba(7, 193, 96, 0.1);
+      border: 1px solid rgba(7, 193, 96, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .wx-pay .success-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #07c160, #4cd964);
     }
     .wx-pay .success-icon {
-      width: 80px;
-      height: 80px;
-      background-color: #07c160;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #07c160, #4cd964);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
+      margin: 0 auto 25px;
+      box-shadow: 0 6px 20px rgba(7, 193, 96, 0.3);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
     .wx-pay .success-icon::after {
       content: "✓";
-      font-size: 40px;
+      font-size: 50px;
       color: #fff;
       font-weight: bold;
     }
     .wx-pay .pay-title {
-      font-size: 20px;
+      font-size: 26px;
       color: #333;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
+      font-weight: 600;
     }
     .wx-pay .pay-desc {
-      font-size: 14px;
-      color: #999;
-      margin-bottom: 30px;
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 35px;
+      line-height: 1.5;
     }
     .wx-pay .cash-amount {
-      font-size: 48px;
+      font-size: 60px;
       color: #07c160;
       font-weight: bold;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 10px rgba(7, 193, 96, 0.2);
+    }
+    .wx-pay .cash-amount::before {
+      content: "￥";
+      font-size: 40px;
+      vertical-align: top;
     }
     .wx-pay .pay-info {
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      padding: 15px;
+      background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+      border-radius: 15px;
+      padding: 25px;
       text-align: left;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      border: 1px solid #eee;
     }
     .wx-pay .pay-info-item {
       display: flex;
       justify-content: space-between;
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 8px;
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #eee;
     }
     .wx-pay .pay-info-item:last-child {
       margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
     }
     .wx-pay .pay-info-item .label {
-      color: #999;
+      color: #888;
+      min-width: 80px;
+    }
+    .wx-pay .pay-info-item .value {
+      font-weight: 500;
+      text-align: right;
+      max-width: 200px;
+      word-break: break-all;
     }
     .wx-pay .wx-logo {
-      width: 100px;
-      height: 30px;
-      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMzAiPgogIDxnIGZpbGw9IiMwN2MxNjAiPgogICAgPHBhdGggZD0iTTUwIDBIMHYYMzBIMTAwVjBIMjVWMTVWMEg1MFoiLz4KICAgIDxwYXRoIGQ9Ik03NSAxNUg3MFY1SDY1VjE1SDYwVjIwSDU1VjE1SDUwVjIwSDQ1VjE1SDQwVjIwSDM1VjE1SDMwVjVWMjVIMjVWMTVWMEgyMEgyNVY1SDAiIGZpbGw9IiNmZmYiLz4KICA8L2c+Cjwvc3ZnPg==") no-repeat center;
+      width: 120px;
+      height: 36px;
+      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMzYiPgogIDxnIGZpbGw9IiMwN2MxNjAiPgogICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIzNiIgcng9IjYiLz4KICAgIDxwYXRoIGQ9Ik0zMCAxMEgyNVYyNkgzNVYxMEgyNVoiIGZpbGw9IiNmZmYiLz4KICAgIDxwYXRoIGQ9Ik02NSAxMEg1NVYyNkg2NVYxMEg1NVoiIGZpbGw9IiNmZmYiLz4KICAgIDxwYXRoIGQ9Ik05MCAxMEg4MFYyNkg5MFYxMEg4MFoiIGZpbGw9IiNmZmYiLz4KICA8L2c+Cjwvc3ZnPg==") no-repeat center;
       background-size: contain;
-      margin: 0 auto;
+      margin: 0 auto 20px;
     }
 
     /* 支付宝支付主题 */
     .alipay-pay {
-      background-color: #e8f4ff;
+      background: linear-gradient(135deg, #e8f4ff 0%, #d4e9ff 100%);
     }
     .alipay-pay .success-card {
       background-color: #fff;
-      border-radius: 12px;
-      padding: 40px 20px;
+      border-radius: 20px;
+      padding: 50px 30px;
       width: 100%;
-      max-width: 400px;
+      max-width: 480px;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px rgba(22, 119, 255, 0.1);
+      border: 1px solid rgba(22, 119, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .alipay-pay .success-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #1677ff, #69b1ff);
     }
     .alipay-pay .success-icon {
-      width: 80px;
-      height: 80px;
-      background-color: #1677ff;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #1677ff, #69b1ff);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
+      margin: 0 auto 25px;
+      box-shadow: 0 6px 20px rgba(22, 119, 255, 0.3);
+      animation: pulse 2s infinite;
     }
     .alipay-pay .success-icon::after {
       content: "✓";
-      font-size: 40px;
+      font-size: 50px;
       color: #fff;
       font-weight: bold;
     }
     .alipay-pay .pay-title {
-      font-size: 20px;
+      font-size: 26px;
       color: #333;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
+      font-weight: 600;
     }
     .alipay-pay .pay-desc {
-      font-size: 14px;
-      color: #999;
-      margin-bottom: 30px;
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 35px;
+      line-height: 1.5;
     }
     .alipay-pay .cash-amount {
-      font-size: 48px;
+      font-size: 60px;
       color: #1677ff;
       font-weight: bold;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 10px rgba(22, 119, 255, 0.2);
+    }
+    .alipay-pay .cash-amount::before {
+      content: "￥";
+      font-size: 40px;
+      vertical-align: top;
     }
     .alipay-pay .pay-info {
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      padding: 15px;
+      background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+      border-radius: 15px;
+      padding: 25px;
       text-align: left;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      border: 1px solid #eee;
     }
     .alipay-pay .pay-info-item {
       display: flex;
       justify-content: space-between;
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 8px;
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #eee;
     }
     .alipay-pay .pay-info-item:last-child {
       margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
     }
     .alipay-pay .pay-info-item .label {
-      color: #999;
+      color: #888;
+      min-width: 80px;
+    }
+    .alipay-pay .pay-info-item .value {
+      font-weight: 500;
+      text-align: right;
+      max-width: 200px;
+      word-break: break-all;
     }
     .alipay-pay .alipay-logo {
-      width: 100px;
-      height: 30px;
-      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMzAiPgogIDxnIGZpbGw9IiMxNjc3ZmYiPgogICAgPHBhdGggZD0iTTUwIDBIMHYYMzBIMTAwVjBIMjVWMTVWMEg1MFoiLz4KICAgIDxwYXRoIGQ9Ik03NSAxNUg3MFY1SDY1VjE1SDYwVjIwSDU1VjE1SDUwVjIwSDQ1VjE1SDQwVjIwSDM1VjE1SDMwVjVWMjVIMjVWMTVWMEgyMEgyNVY1SDAiIGZpbGw9IiNmZmYiLz4KICA8L2c+Cjwvc3ZnPg==") no-repeat center;
+      width: 120px;
+      height: 36px;
+      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMzYiPgogIDxnIGZpbGw9IiMxNjc3ZmYiPgogICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIzNiIgcng9IjYiLz4KICAgIDxwYXRoIGQ9Ik00MCA4SDMwVjI4SDQwVjE4SDYwVjI4SDcwVjE4SDkwVjI4SDEwMFY4SDkwVjE4SDcwVjhINjBWMThINDBWOFoiIGZpbGw9IiNmZmYiLz4KICA8L2c+Cjwvc3ZnPg==") no-repeat center;
       background-size: contain;
-      margin: 0 auto;
+      margin: 0 auto 20px;
     }
 
     /* 现金支付主题 */
     .cash-pay {
-      background-color: #f8f8f8;
+      background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
     }
     .cash-pay .success-card {
       background-color: #fff;
-      border-radius: 12px;
-      padding: 40px 20px;
+      border-radius: 20px;
+      padding: 50px 30px;
       width: 100%;
-      max-width: 400px;
+      max-width: 480px;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    .cash-pay .success-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #666, #999);
     }
     .cash-pay .success-icon {
-      width: 80px;
-      height: 80px;
-      background-color: #666;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #666, #999);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
+      margin: 0 auto 25px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      animation: pulse 2s infinite;
     }
     .cash-pay .success-icon::after {
       content: "✓";
-      font-size: 40px;
+      font-size: 50px;
       color: #fff;
       font-weight: bold;
     }
     .cash-pay .pay-title {
-      font-size: 20px;
+      font-size: 26px;
       color: #333;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
+      font-weight: 600;
     }
     .cash-pay .pay-desc {
-      font-size: 14px;
-      color: #999;
-      margin-bottom: 30px;
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 35px;
+      line-height: 1.5;
     }
     .cash-pay .cash-amount {
-      font-size: 48px;
-      color: #666;
+      font-size: 60px;
+      color: #333;
       font-weight: bold;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .cash-pay .cash-amount::before {
+      content: "￥";
+      font-size: 40px;
+      vertical-align: top;
     }
     .cash-pay .pay-info {
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      padding: 15px;
+      background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+      border-radius: 15px;
+      padding: 25px;
       text-align: left;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      border: 1px solid #eee;
     }
     .cash-pay .pay-info-item {
       display: flex;
       justify-content: space-between;
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 8px;
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #eee;
     }
     .cash-pay .pay-info-item:last-child {
       margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
     }
     .cash-pay .pay-info-item .label {
+      color: #888;
+      min-width: 80px;
+    }
+    .cash-pay .pay-info-item .value {
+      font-weight: 500;
+      text-align: right;
+      max-width: 200px;
+      word-break: break-all;
+    }
+
+    /* 新增：额外信息展示区域 */
+    .extra-info {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 25px;
+      width: 100%;
+      max-width: 480px;
+      border-left: 4px solid;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    .wx-pay .extra-info {
+      border-left-color: #07c160;
+      background: rgba(7, 193, 96, 0.05);
+    }
+    .alipay-pay .extra-info {
+      border-left-color: #1677ff;
+      background: rgba(22, 119, 255, 0.05);
+    }
+    .cash-pay .extra-info {
+      border-left-color: #666;
+      background: rgba(102, 102, 102, 0.05);
+    }
+    .extra-info h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .extra-info h3::before {
+      content: "💡";
+      font-size: 20px;
+    }
+    .extra-info p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .extra-info .tip-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 8px;
+    }
+    .extra-info .tip-item:last-child {
+      margin-bottom: 0;
+    }
+    .extra-info .tip-icon {
+      font-size: 18px;
+      margin-top: 2px;
+    }
+
+    /* 新增：支付成功动画效果 */
+    @keyframes successFloat {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) scale(1.02); }
+      100% { transform: translateY(0) scale(1); }
+    }
+    .success-card {
+      animation: successFloat 3s ease-in-out infinite;
+    }
+
+    /* 新增：作者信息展示 */
+    .author-info {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 14px;
+      color: #666;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(5px);
+    }
+    .author-info .author-name {
+      font-weight: 600;
+      color: #333;
+    }
+    .author-info .student-id {
       color: #999;
+      font-size: 12px;
     }
 
     /* 底部按钮 */
     .back-btn {
       width: 100%;
-      max-width: 400px;
-      height: 44px;
-      line-height: 44px;
+      max-width: 480px;
+      height: 52px;
+      line-height: 52px;
       text-align: center;
-      background-color: #fff;
-      border: 1px solid #eee;
-      border-radius: 8px;
-      font-size: 16px;
-      color: #666;
-      margin-top: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      color: white;
+      margin-top: 30px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      letter-spacing: 1px;
     }
     .back-btn:hover {
-      background-color: #f5f5f5;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
     }
 
     /* 响应式适配 */
-    @media (max-width: 400px) {
-      .cash-amount {
-        font-size: 36px !important;
+    @media (max-width: 480px) {
+      .watermark::before {
+        font-size: 24px;
+        line-height: 120px;
+        letter-spacing: 4px;
+      }
+      .watermark::after {
+        top: 10px;
+        right: 10px;
+        font-size: 14px;
+        padding: 6px 12px;
       }
       .success-card {
-        padding: 30px 15px !important;
+        padding: 30px 20px !important;
+        margin: 15px;
+      }
+      .cash-amount {
+        font-size: 48px !important;
+      }
+      .pay-title {
+        font-size: 22px !important;
+      }
+      .pay-desc {
+        font-size: 14px !important;
+      }
+      .success-icon {
+        width: 80px !important;
+        height: 80px !important;
+        margin-bottom: 20px !important;
+      }
+      .success-icon::after {
+        font-size: 40px !important;
+      }
+      .author-info {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
-  <!-- 水印层 -->
+  <!-- 增强的水印层 -->
   <div class="watermark"></div>
   
   <!-- 支付容器（动态切换类名） -->
@@ -307,25 +563,58 @@
       <div class="success-icon"></div>
       <h2 class="pay-title" id="payTitle">支付成功</h2>
       <p class="pay-desc" id="payDesc">您的订单已支付完成</p>
-      <div class="cash-amount" id="cashAmount">¥0.00</div>
+      <div class="cash-amount" id="cashAmount">0.00</div>
       <div class="pay-info">
         <div class="pay-info-item">
           <span class="label">支付方式</span>
-          <span id="payMethod">未知</span>
+          <span class="value" id="payMethod">未知</span>
         </div>
         <div class="pay-info-item">
           <span class="label">支付时间</span>
-          <span id="payTime"></span>
+          <span class="value" id="payTime"></span>
         </div>
         <div class="pay-info-item">
           <span class="label">订单编号</span>
-          <span id="orderNo"></span>
+          <span class="value" id="orderNo"></span>
+        </div>
+        <div class="pay-info-item">
+          <span class="label">商户名称</span>
+          <span class="value" id="merchantName">LYX毕设商店</span>
+        </div>
+        <div class="pay-info-item">
+          <span class="label">收款账号</span>
+          <span class="value" id="accountInfo">毕设专用账户</span>
         </div>
       </div>
       <!-- 支付方式logo（微信/支付宝） -->
       <div id="payLogo" class=""></div>
     </div>
+    
+    <!-- 新增：额外信息展示 -->
+    <div class="extra-info" id="extraInfo">
+      <h3>温馨提示</h3>
+      <div class="tip-item">
+        <span class="tip-icon">📱</span>
+        <span>请妥善保管支付凭证，如需发票请联系客服</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-icon">⏰</span>
+        <span>订单将在30分钟内处理，您可在订单中心查看进度</span>
+      </div>
+      <div class="tip-item">
+        <span class="tip-icon">⭐</span>
+        <span>感谢您的支持，期待您再次光临！</span>
+      </div>
+    </div>
+    
     <div class="back-btn" onclick="history.back()">返回上一页</div>
+  </div>
+  
+  <!-- 新增：作者信息展示 -->
+  <div class="author-info">
+    <span>毕业设计作品 ·</span>
+    <span class="author-name">作者：LYX</span>
+    <span class="student-id">学号：2024XXXX</span>
   </div>
 
   <script>
@@ -333,15 +622,16 @@
     const getUrlParams = () => {
       const params = new URLSearchParams(window.location.search);
       return {
-        pay: params.get('pay') || 'cash', // 默认现金支付
-        cash: params.get('cash') || '0.00' // 默认0元
+        pay: params.get('pay') || 'cash',
+        cash: params.get('cash') || '99.99',
+        merchant: params.get('merchant') || 'LYX毕设商店'
       };
     };
 
     // 2. 格式化金额（确保两位小数）
     const formatCash = (cash) => {
       const num = parseFloat(cash);
-      return isNaN(num) ? '0.00' : num.toFixed(2);
+      return isNaN(num) ? '99.99' : num.toFixed(2);
     };
 
     // 3. 生成随机订单号
@@ -351,7 +641,7 @@
       const month = (date.getMonth() + 1).toString().padStart(2, '0');
       const day = date.getDate().toString().padStart(2, '0');
       const random = Math.floor(Math.random() * 100000000).toString().padStart(8, '0');
-      return `${year}${month}${day}${random}`;
+      return `DD${year}${month}${day}${random}`;
     };
 
     // 4. 格式化支付时间
@@ -366,9 +656,57 @@
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     };
 
-    // 5. 初始化页面
+    // 5. 设置商户信息
+    const setMerchantInfo = (payType) => {
+      const merchantName = document.getElementById('merchantName');
+      const accountInfo = document.getElementById('accountInfo');
+      
+      switch(payType) {
+        case 'wxQC':
+          merchantName.textContent = '微信支付商户';
+          accountInfo.textContent = 'wechat_merchant@lyx.com';
+          break;
+        case 'alipayQC':
+          merchantName.textContent = '支付宝商户';
+          accountInfo.textContent = 'alipay_merchant@lyx.com';
+          break;
+        case 'cash':
+          merchantName.textContent = 'LYX实体商店';
+          accountInfo.textContent = '现金收款';
+          break;
+        default:
+          merchantName.textContent = 'LYX毕设商店';
+          accountInfo.textContent = '毕设专用账户';
+      }
+    };
+
+    // 6. 设置额外提示信息
+    const setExtraInfo = (payType) => {
+      const extraInfo = document.getElementById('extraInfo');
+      const tipItems = extraInfo.querySelectorAll('.tip-item');
+      
+      switch(payType) {
+        case 'wxQC':
+          tipItems[0].innerHTML = '<span class="tip-icon">💬</span><span>微信支付成功，已发送支付通知到您的微信</span>';
+          tipItems[1].innerHTML = '<span class="tip-icon">📊</span><span>关注"LYX毕设"公众号，获取订单实时状态</span>';
+          tipItems[2].innerHTML = '<span class="tip-icon">🎁</span><span>首次微信支付用户可获得10元优惠券</span>';
+          break;
+        case 'alipayQC':
+          tipItems[0].innerHTML = '<span class="tip-icon">💬</span><span>支付宝支付成功，可在支付宝账单查看详情</span>';
+          tipItems[1].innerHTML = '<span class="tip-icon">📊</span><span>订单已同步至支付宝"我的快递"，方便追踪</span>';
+          tipItems[2].innerHTML = '<span class="tip-icon">🎁</span><span>使用支付宝积分可兑换店铺优惠券</span>';
+          break;
+        case 'cash':
+          tipItems[0].innerHTML = '<span class="tip-icon">🧾</span><span>请妥善保管收据小票，作为售后服务凭证</span>';
+          tipItems[1].innerHTML = '<span class="tip-icon">📞</span><span>如需发票，请凭收据到服务台开具</span>';
+          tipItems[2].innerHTML = '<span class="tip-icon">🏪</span><span>欢迎再次光临LYX实体商店</span>';
+          break;
+      }
+    };
+
+    // 7. 初始化页面
     const initPage = () => {
-      const { pay, cash } = getUrlParams();
+      const { pay, cash, merchant } = getUrlParams();
       const container = document.getElementById('payContainer');
       const payTitle = document.getElementById('payTitle');
       const payDesc = document.getElementById('payDesc');
@@ -379,10 +717,14 @@
       const payLogo = document.getElementById('payLogo');
 
       // 设置金额
-      cashAmount.textContent = `¥${formatCash(cash)}`;
+      cashAmount.textContent = formatCash(cash);
       // 设置时间和订单号
       payTime.textContent = formatPayTime();
       orderNo.textContent = generateOrderNo();
+      // 设置商户信息
+      setMerchantInfo(pay);
+      // 设置额外信息
+      setExtraInfo(pay);
 
       // 根据支付方式切换样式和文案
       switch (pay) {
@@ -390,7 +732,7 @@
           // 微信支付
           container.className = 'pay-container wx-pay';
           payTitle.textContent = '微信支付成功';
-          payDesc.textContent = '支付金额已到账，感谢您的支付';
+          payDesc.textContent = '支付已完成，感谢您使用微信支付';
           payMethod.textContent = '微信支付';
           payLogo.className = 'wx-logo';
           break;
@@ -398,7 +740,7 @@
           // 支付宝支付
           container.className = 'pay-container alipay-pay';
           payTitle.textContent = '支付宝支付成功';
-          payDesc.textContent = '支付金额已到账，感谢您的支付';
+          payDesc.textContent = '支付已完成，感谢您使用支付宝';
           payMethod.textContent = '支付宝支付';
           payLogo.className = 'alipay-logo';
           break;
@@ -406,9 +748,9 @@
           // 现金支付
           container.className = 'pay-container cash-pay';
           payTitle.textContent = '现金支付成功';
-          payDesc.textContent = '已完成现金收款，订单已确认';
+          payDesc.textContent = '已完成现金收款，感谢您的光临';
           payMethod.textContent = '现金支付';
-          payLogo.style.display = 'none'; // 隐藏logo
+          payLogo.style.display = 'none';
           break;
         default:
           // 默认现金支付
